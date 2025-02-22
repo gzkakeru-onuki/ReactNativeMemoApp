@@ -1,0 +1,32 @@
+//TypeScriptの基本
+let test: string = "test"
+  test = "test"
+  let test2: number = 1
+  test2 = 2
+  let test3: boolean = true
+  test3 = false
+
+  //anyを使うと型を指定しなくて済む
+  let test4: any = "test"
+  test4 = 1
+
+  //配列
+  let test5: string[] = ["test", "test2"]
+  test5.push("test3")
+  
+  const testfunc = ():string =>{
+    return "test"
+  }
+
+  const testfunc2 = ():void =>{
+    console.log("test")
+  }
+
+  const testfunc3 = ():number =>{
+    return 1
+  }
+
+  const testfunc4 = ():boolean =>{
+    return true
+  }
+  
