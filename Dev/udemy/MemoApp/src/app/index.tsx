@@ -1,27 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native'
-import Header from '../components/Header'
-import MemoListItem from '../components/MemoListItem'
-import CircleButton from '../components/CircleButton'
-const index = (): JSX.Element => {
-    return (
-        <View style={styles.container}>
-            <Header />
+import {Redirect} from 'expo-router'
 
-            <MemoListItem />
-
-            <CircleButton />
-
-        </View>
-
-    )
+const index =() =>{
+    return <Redirect href="/auth/log_in" />
+    
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-
-})
 
 export default index
