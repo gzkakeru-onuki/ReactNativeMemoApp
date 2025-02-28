@@ -2,19 +2,22 @@ import { View, Text, StyleSheet,TextInput,TouchableOpacity } from 'react-native'
 import Header from '../../components/Header'
 import Button from '../../components/Button'    
 import { Link, router } from 'expo-router'
+import { useState } from 'react'
 const handlePress = ():void  => {
     //ログイン
     //メモリスト画面に遷移
     router.replace("/memo/list")
     }
-const LogIn = () => {
+const LogIn = ():JSX.Element => {
+    const[email,setEmail]=useState<string>("")
+    const[password,setPassword]=useState<string>("")
     return (
         <View style={styles.container}>
             
             <View style={styles.inner}>
                 <Text style={styles.title}>Login</Text>
-                <TextInput style={styles.input} placeholder="メールアドレス" />
-                <TextInput style={styles.input} placeholder="パスワード" />
+                <TextInput style={styles.input} placeholder="メールアドレス" value={email} onChangeText={(text)=>{setEmail(text)}} autoCapitalize="none" keyboardType='email-address'/>
+                <TextInput style={styles.input} placeholder="パスワード" value={password} onChangeText={(text)=>{setPassword(text)}} autoCapitalize="none" secureTextEntry/>
             </View> 
             <Button label="Submit" onPress={handlePress} />
             <View style={styles.footer}>
