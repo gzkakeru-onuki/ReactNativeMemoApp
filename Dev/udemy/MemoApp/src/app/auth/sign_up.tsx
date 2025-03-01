@@ -3,26 +3,39 @@ import Header from '../../components/Header'
 import Button from '../../components/Button'
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
-const handlePress = (): void => {
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../../config.js"
+import { Alert } from 'react-native'
+const handlePress = (email: string, password: string): void => {
     //サインアップ
     //メモリスト画面に遷移
-    router.push("/memo/list")
+    //会員登録
+    console.log(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            console.log(userCredential.user.uid)
+            router.replace("/memo/list")
+        })
+        .catch((error) => {
+            const {code,message} =error
+            Alert.alert(code,message)
+        })
 }
 const SignUp = () => {
-    const[email,setEmail]=useState<string>("")
-    const[password,setPassword]=useState<string>("")
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
     return (
         <View style={styles.container}>
-            
+
             <View style={styles.inner}>
                 <Text style={styles.title}>Signup</Text>
-                <TextInput style={styles.input} placeholder="メールアドレス" value={email} onChangeText={(text)=>{setEmail(text)}}/>
-                <TextInput style={styles.input} placeholder="パスワード" value={password} onChangeText={(text)=>{setPassword(text)}}/>
+                <TextInput style={styles.input} placeholder="メールアドレス" value={email} onChangeText={(text) => { setEmail(text) }} autoCapitalize="none" keyboardType="email-address" />
+                <TextInput style={styles.input} placeholder="パスワード" value={password} onChangeText={(text) => { setPassword(text) }} />
             </View>
-            <Button label="Submit" onPress={handlePress} />
+            <Button label="Submit" onPress={() => { handlePress(email, password) }} />
             <View style={styles.footer}>
                 <Text style={styles.footerText}>Already registered? </Text>
-                <Link href="/auth/log_in" asChild>
+                <Link href="/auth/log_in" asChild replace>
                     <TouchableOpacity>
                         <Text style={styles.footerLink}>Log in!</Text>
                     </TouchableOpacity>
