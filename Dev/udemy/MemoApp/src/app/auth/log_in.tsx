@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet,TextInput,TouchableOpacity } from 'react-native'
-import Header from '../../components/Header'
 import Button from '../../components/Button'    
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
